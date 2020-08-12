@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/background">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_margin="5dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/cofee"
+                        android:id="@+id/ivProfile">
+
+                    </de.hdodenhof.circleimageview.CircleImageView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Muhammad Supriyadi"
+                            android:gravity="center"
+                            android:fontFamily="@font/gotham"
+                            android:textSize="15sp"
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="bold"
+                            android:id="@+id/tvNama"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Email"
+                            android:gravity="center"
+                            android:fontFamily="@font/gotham"
+                            android:textSize="12sp"
+                            android:textColor="@color/colorPrimary"
+                            android:textStyle="bold"
+                            android:id="@+id/tvEmail"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_round_blue"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="30dp"
+                android:text="Pesan"
+                android:id="@+id/btnPesan"
+                android:textColor="@color/colorWhite"/>
+            <Button
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_round_blue"
+                android:text="Lainnya"
+                android:id="@+id/btnLainnya"
+                android:textColor="@color/colorWhite"/>
+            <Button
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_round_blue"
+                android:text="Keluar"
+                android:id="@+id/btnKeluar"
+                android:textColor="@color/colorWhite"/>
+        </LinearLayout>
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/Loading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <com.airbnb.lottie.LottieAnimationView
+                    app:lottie_loop="true"
+                    app:lottie_fileName="frankeinstein.json"
+                    app:lottie_autoPlay="true"
+                    android:id="@+id/lottie"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="50dp">
+
+                </com.airbnb.lottie.LottieAnimationView>
+            </RelativeLayout>
+            <TextView
+                android:layout_weight="2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Sabar...\nPage Akun sedang dimuat"
+                android:textSize="25sp"
+                android:gravity="center|top"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:fontFamily="@font/gotham"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</FrameLayout>

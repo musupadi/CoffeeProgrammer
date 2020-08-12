@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Coffee Programmer</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="test"><pre>
+<code class="language-php">&lt;?php
+echo "h3h3";
+?&gt;</code></pre></string>
+    <string name="facebook_app_id">299534651286638</string>
+    <string name="fb_login_protocol_scheme">fb299534651286638</string>
+</resources>

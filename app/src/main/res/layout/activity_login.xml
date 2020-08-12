@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:elevation="0dp"
+        android:id="@+id/appBarId"
+        android:orientation="vertical"
+        android:background="@drawable/background">
+        <com.airbnb.lottie.LottieAnimationView
+            app:lottie_loop="true"
+            app:lottie_fileName="coffe.json"
+            app:lottie_autoPlay="true"
+            android:id="@+id/lottie"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center">
+
+        </com.airbnb.lottie.LottieAnimationView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:text="Coffee Programmers"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            android:gravity="center|top"
+            android:textSize="20sp"
+            android:fontFamily="@font/gotham"/>
+    </LinearLayout>
+    <com.google.android.material.tabs.TabLayout
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        app:tabGravity="fill"
+        app:tabMode="fixed"
+        android:id="@+id/tableLayout"
+        app:tabTextColor="@color/colorGrey"
+        app:tabSelectedTextColor="@color/colorWhite">
+    </com.google.android.material.tabs.TabLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.viewpager.widget.ViewPager
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/viewpager"
+            android:layout_marginBottom="?actionBarSize">
+
+        </androidx.viewpager.widget.ViewPager>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:padding="10dp">
+            <com.facebook.login.widget.LoginButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/loginButton"
+                android:layout_alignParentBottom="true">
+
+            </com.facebook.login.widget.LoginButton>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+
+
+
+</LinearLayout>
