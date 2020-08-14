@@ -2,6 +2,7 @@
     <string name="app_name">Coffee Programmer</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="BASE_URL">http://192.168.0.17/CoffeeProgrammer/</string>
     <string name="test"><pre>
 <code class="language-php">&lt;?php
 echo "h3h3";

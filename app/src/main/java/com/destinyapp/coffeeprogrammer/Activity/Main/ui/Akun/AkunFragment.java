@@ -1,6 +1,7 @@
 package com.destinyapp.coffeeprogrammer.Activity.Main.ui.Akun;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,9 +18,13 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.destinyapp.coffeeprogrammer.API.ApiRequest;
+import com.destinyapp.coffeeprogrammer.API.RetroServer;
 import com.destinyapp.coffeeprogrammer.Activity.Login.LoginActivity;
 import com.destinyapp.coffeeprogrammer.Model.Musupadi;
+import com.destinyapp.coffeeprogrammer.Model.ResponseModel;
 import com.destinyapp.coffeeprogrammer.R;
+import com.destinyapp.coffeeprogrammer.SharedPreferance.DB_Helper;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.GraphRequest;
@@ -30,6 +35,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class AkunFragment extends Fragment {
@@ -39,7 +47,8 @@ public class AkunFragment extends Fragment {
     CircleImageView ProfileImg;
     TextView nama,email;
     Musupadi musupadi = new Musupadi();
-    EditText test;
+    DB_Helper dbHelper;
+    String ID,NAME;
     public AkunFragment() {
         // Required empty public constructor
     }
@@ -64,16 +73,49 @@ public class AkunFragment extends Fragment {
         nama=view.findViewById(R.id.tvNama);
         email=view.findViewById(R.id.tvEmail);
         ProfileImg=view.findViewById(R.id.ivProfile);
-        keluar=view.findViewById(R.id.btnKeluar);
-        test=view.findViewById(R.id.test);
-        checkLoginStatus();
-        keluar.setOnClickListener(new View.OnClickListener() {
+        dbHelper = new DB_Helper(getActivity());
+        Cursor cursor = dbHelper.checkSession();
+        if (cursor.getCount()>0){
+            while (cursor.moveToNext()){
+                ID = cursor.getString(0);
+                NAME = cursor.getString(1);
+            }
+        }
+        if (ID != null){
+            getData();
+        }else{
+            Intent intent = new Intent(getActivity(),LoginActivity.class);
+            startActivity(intent);
+            getActivity().finish();
+        }
+//        keluar=view.findViewById(R.id.btnKeluar);
+//        checkLoginStatus();
+//        keluar.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                LoginManager.getInstance().logOut();
+//            }
+//        });
+    }
+    private void getData(){
+        nama.setText(NAME);
+        ApiRequest api = RetroServer.getClient().create(ApiRequest.class);
+        Call<ResponseModel> data = api.UsersData(ID);
+        data.enqueue(new Callback<ResponseModel>() {
             @Override
-            public void onClick(View view) {
-                LoginManager.getInstance().logOut();
+            public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                email.setText(response.body().getData().get(0).email_users);
+                String image_url = getActivity().getString(R.string.BASE_URL)+"img/profile/"+response.body().getData().get(0).image_users;
+                Glide.with(getActivity())
+                        .load(image_url)
+                        .into(ProfileImg);
+            }
+
+            @Override
+            public void onFailure(Call<ResponseModel> call, Throwable t) {
+
             }
         });
-        test.setText(musupadi.Base64(musupadi.md5("123")));
     }
 
     AccessTokenTracker tokenTracker = new AccessTokenTracker() {

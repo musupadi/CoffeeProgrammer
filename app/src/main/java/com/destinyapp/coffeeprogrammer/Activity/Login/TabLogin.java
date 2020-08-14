@@ -23,6 +23,7 @@ import com.destinyapp.coffeeprogrammer.API.RetroServer;
 import com.destinyapp.coffeeprogrammer.Activity.Main.MainActivity;
 import com.destinyapp.coffeeprogrammer.Model.ResponseModel;
 import com.destinyapp.coffeeprogrammer.R;
+import com.destinyapp.coffeeprogrammer.SharedPreferance.DB_Helper;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
@@ -48,7 +49,7 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 import static com.facebook.FacebookSdk.setAutoLogAppEventsEnabled;
 
 public class TabLogin extends Fragment {
-
+    DB_Helper dbHelper;
     EditText email,password;
     Button submit;
     LinearLayout loading;
@@ -78,7 +79,7 @@ public class TabLogin extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         callbackManager = CallbackManager.Factory.create();
         email=view.findViewById(R.id.etEmail);
-        loginButton=view.findViewById(R.id.loginButton);
+//        loginButton=view.findViewById(R.id.loginButton);
         password=view.findViewById(R.id.etPassword);
         submit=view.findViewById(R.id.btnLogin);
         loading=view.findViewById(R.id.linearLoading);
@@ -107,30 +108,30 @@ public class TabLogin extends Fragment {
                 Toast.makeText(getActivity(), "Email Harus berisi Email", Toast.LENGTH_SHORT).show();
                 normal();
             }else{
-//                Logic();
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
+                Logic();
             }
         }
     }
     private void Logic(){
+        dbHelper = new DB_Helper(getActivity());
         ApiRequest api = RetroServer.getClient().create(ApiRequest.class);
-        Call<ResponseModel> Login = api.Login(email.getText().toString(),password.getText().toString());
-        Login.enqueue(new Callback<ResponseModel>() {
+        Call<ResponseModel> login = api.Login(email.getText().toString(),password.getText().toString());
+        login.enqueue(new Callback<ResponseModel>() {
             @Override
             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
                 try {
                     if (response.body().getStatus().equals("success")){
                         normal();
-                        Toast.makeText(getActivity(), response.body().getData().get(0).email, Toast.LENGTH_SHORT).show();
+                        dbHelper.saveSession(response.body().getData().get(0).id_users,response.body().getData().get(0).nama_users);
                         Intent intent = new Intent(getActivity(), MainActivity.class);
                         startActivity(intent);
+                        getActivity().finish();
                     }else{
                         Toast.makeText(getActivity(), "Username atau Password Salah", Toast.LENGTH_SHORT).show();
                         normal();
                     }
                 }catch (Exception e){
-                    Toast.makeText(getActivity(), "Terjadi Kesalahan", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Terjadi Kesalahan"+e.toString(), Toast.LENGTH_SHORT).show();
                     normal();
                 }
             }

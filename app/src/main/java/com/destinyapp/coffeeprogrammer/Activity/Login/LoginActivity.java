@@ -34,38 +34,38 @@ public class LoginActivity extends AppCompatActivity {
     TabLayout Table;
     ViewPager viewPager;
     CallbackManager callbackManager;
-    LoginButton loginButton;
+//    LoginButton loginButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Table=findViewById(R.id.tableLayout);
         viewPager = findViewById(R.id.viewpager);
-        loginButton = findViewById(R.id.loginButton);
+//        loginButton = findViewById(R.id.loginButton);
         TabPagerAdapter adapter = new TabPagerAdapter(getSupportFragmentManager());
         adapter.AddFragment(new TabLogin(),"Masuk");
         adapter.AddFragment(new TabRegister(),"Daftar");
         viewPager.setAdapter(adapter);
         Table.setupWithViewPager(viewPager);
-        callbackManager = CallbackManager.Factory.create();
-        loginButton.setPermissions(Arrays.asList("email","public_profile"));
-        checkLoginStatus();
-        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-//                Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onCancel() {
-//                Toast.makeText(getActivity(), "Cancel", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-//                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        callbackManager = CallbackManager.Factory.create();
+//        loginButton.setPermissions(Arrays.asList("email","public_profile"));
+//        checkLoginStatus();
+//        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+//            @Override
+//            public void onSuccess(LoginResult loginResult) {
+////                Toast.makeText(getActivity(), "Success", Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onCancel() {
+////                Toast.makeText(getActivity(), "Cancel", Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onError(FacebookException error) {
+////                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 
     @Override
